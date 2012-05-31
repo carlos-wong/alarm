@@ -21,6 +21,8 @@ public class Kyomen_alarmActivity extends Activity {
 	private int textlength = 0;
 	private Timer timer;
 	Vibrator vibrator;// = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+	final long[] vibrate_pattern = {800, 50, 400, 30}; // OFF/ON/OFF/ON...  
+
 
 	private Handler myHandler = new Handler(){
 		public void handleMessage(Message msg)
@@ -36,11 +38,13 @@ public class Kyomen_alarmActivity extends Activity {
 					//TODO 储存的方式不应该每次设置应该有一个默认的值。给用户一个反应的时间。当然第一次设置之前这个提示应该是一直存在的。
 					Log.v("", "YEAH YOU FINISH");
 					timer.cancel();
+					vibrator.cancel();
 				}
 				else
 				{
 					//TODO do something to alarm
 					Log.v("", "ARE YOU SLEEP?");
+					vibrator.vibrate(vibrate_pattern, 2);//TODO you must make sure this work well
 				}
 				break;
 			}
