@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Vibrator;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ public class Kyomen_alarmActivity extends Activity {
 	private TextView data_add;
 	private int textlength = 0;
 	private Timer timer;
+	Vibrator vibrator;// = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
 	private Handler myHandler = new Handler(){
 		public void handleMessage(Message msg)
@@ -44,6 +46,7 @@ public class Kyomen_alarmActivity extends Activity {
 			}
 		};
 	};
+	
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,7 +60,7 @@ public class Kyomen_alarmActivity extends Activity {
         catch (Exception e) {
         	e.printStackTrace();
 		}
-        
+        vibrator =  (Vibrator) getSystemService(VIBRATOR_SERVICE);
     }
     private class myTask extends TimerTask{
     	@Override
