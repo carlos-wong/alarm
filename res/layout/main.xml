@@ -4,12 +4,19 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
+    <Button
+        android:id="@+id/button_share"
+        android:layout_width="335dp"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
     <EditText
         android:id="@+id/data_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.93"
-        android:ems="10" >
+        android:layout_weight="0.57"
+        android:ems="10"
+        android:gravity="fill_vertical" >
 
         <requestFocus />
     </EditText>
