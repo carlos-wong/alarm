@@ -1,5 +1,14 @@
 package com.kyomen.alarm;
 
+import android.app.PendingIntent;
+import android.app.TimePickerDialog;
+import android.app.TimePickerDialog.OnTimeSetListener;
+
+
+import java.security.PublicKey;
+import java.util.Calendar;
+
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -15,6 +24,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 //TODO 当程序退出的时候定时器可能没有退出，所以需要程序退出的时候检查定时器。重复退出是否会有问题
 
@@ -29,7 +40,15 @@ public class Kyomen_alarmActivity extends Activity {
 	Vibrator vibrator;// = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 	final long[] vibrate_pattern = {800, 50, 400, 30}; // OFF/ON/OFF/ON...  
 	MediaPlayer mplayer;
+	private TimePickerDialog timepickdialog;
+	
 
+	
+	Calendar c= Calendar.getInstance();
+	int mHour=c.get(Calendar.HOUR_OF_DAY);
+    int mMinute=c.get(Calendar.MINUTE);
+    
+	
 	private Handler myHandler = new Handler(){
 		public void handleMessage(Message msg)
 		{
@@ -76,8 +95,8 @@ public class Kyomen_alarmActivity extends Activity {
 //        //vibrator =  (Vibrator) getSystemService(VIBRATOR_SERVICE);
 //        mplayer = MediaPlayer.create(this, R.raw.ring);
 //          	mplayer.start();
-          	
-          	
+        timepickdialog = new TimePickerDialog( this, mTimeSetListener, mHour, mMinute, true);
+        
 		OnClickListener listener = new OnClickListener() {
 
 			@Override
@@ -87,12 +106,19 @@ public class Kyomen_alarmActivity extends Activity {
 				if (v.getId() == R.id.button_share) {
 					Log.v("MyTag",
 							"run the code to handler click button share");
-					Intent intent = new Intent(Intent.ACTION_SEND);
-					intent.setType("text/plain");
-					intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
-					intent.putExtra(Intent.EXTRA_TEXT,
-							"I would like to share this with you...");
-					startActivity(Intent.createChooser(intent, getTitle()));
+//					Intent intent = new Intent(Intent.ACTION_SEND);
+//					intent.setType("text/plain");
+//					intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
+//					intent.putExtra(Intent.EXTRA_TEXT,
+//							"I would like to share this with you...");
+//					startActivity(Intent.createChooser(intent, getTitle()));
+					/* 取得点击按钮时的时间作为TimePickerDialog的默认值 */
+			        c.setTimeInMillis(System.currentTimeMillis());
+			        mHour=c.get(Calendar.HOUR_OF_DAY);
+			        mMinute=c.get(Calendar.MINUTE);
+			        /* 跳出TimePickerDialog来设置时间 */
+			        timepickdialog.show();
+			        //new TimePickerDialog( this, mTimeSetListener, mHour, mMinute, true).show();
 				}
 			}
 		};
@@ -110,4 +136,19 @@ public class Kyomen_alarmActivity extends Activity {
     		Log.v("","timer task run");
     	}
 	}
+    
+    private TimePickerDialog.OnTimeSetListener mTimeSetListener =  
+            new TimePickerDialog.OnTimeSetListener()   
+       {  
+  
+                @Override  
+                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {  
+                    // TODO Auto-generated method stub  
+                     int hour = hourOfDay;  
+                     int minute1 = minute;    
+                        Toast.makeText(getBaseContext(),   
+                            "You have selected : " + hour + ":" + minute1,  
+                            Toast.LENGTH_SHORT).show();  
+                }  
+            }; 
 }

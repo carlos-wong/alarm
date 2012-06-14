@@ -18,6 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+ 
+    <receiver android:name=".CallAlarm" android:process=":remote" />
+    <activity android:name=".Alarmalert"
+              android:label="@string/app_name">
+    </activity>
     </application>
 
 </manifest>
