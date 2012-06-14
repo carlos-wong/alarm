@@ -5,6 +5,9 @@ import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
 
 
+
+import android.app.AlarmManager;
+
 import java.security.PublicKey;
 import java.util.Calendar;
 
@@ -142,8 +145,21 @@ public class Kyomen_alarmActivity extends Activity {
        {  
   
                 @Override  
-                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {  
-                    // TODO Auto-generated method stub  
+                public void onTimeSet(TimePicker view, int hourOfDay, int minute) { 
+                	 c.setTimeInMillis(System.currentTimeMillis());
+                     c.set(Calendar.HOUR_OF_DAY,hourOfDay);
+                     c.set(Calendar.MINUTE,minute);
+                     c.set(Calendar.SECOND,0);
+                     c.set(Calendar.MILLISECOND,0);
+                     Intent intent = new Intent(Kyomen_alarmActivity.this, CallAlarm.class);
+                     PendingIntent sender=PendingIntent.getBroadcast(
+                    		 Kyomen_alarmActivity.this,0, intent, 0);
+                     AlarmManager am;
+                     am = (AlarmManager)getSystemService(ALARM_SERVICE);
+                     am.set(AlarmManager.RTC_WAKEUP,
+                            c.getTimeInMillis(),
+                            sender
+                           );
                      int hour = hourOfDay;  
                      int minute1 = minute;    
                         Toast.makeText(getBaseContext(),   
