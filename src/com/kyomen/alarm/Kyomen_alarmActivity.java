@@ -1,16 +1,11 @@
 package com.kyomen.alarm;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import org.apache.http.util.EncodingUtils;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -20,7 +15,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 //TODO 当程序退出的时候定时器可能没有退出，所以需要程序退出的时候检查定时器。重复退出是否会有问题
 
@@ -79,9 +73,9 @@ public class Kyomen_alarmActivity extends Activity {
 //        catch (Exception e) {
 //        	e.printStackTrace();
 //		}
-        //vibrator =  (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        mplayer = MediaPlayer.create(this, R.raw.ring);
-          	mplayer.start();
+//        //vibrator =  (Vibrator) getSystemService(VIBRATOR_SERVICE);
+//        mplayer = MediaPlayer.create(this, R.raw.ring);
+//          	mplayer.start();
           	
           	
 		OnClickListener listener = new OnClickListener() {
