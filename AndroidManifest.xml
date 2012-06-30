@@ -9,6 +9,13 @@
     <application
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name">
+        
+    	<receiver android:name=".CallAlarm">
+            <intent-filter>
+                <action android:name="android.alarm.demo.action" />
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name=".Kyomen_alarmActivity"
             android:label="@string/app_name" >
@@ -18,11 +25,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
- 
-    <receiver android:name=".CallAlarm" android:process=":remote" />
-    <activity android:name=".Alarmalert"
+
+
+         <activity android:name=".Alarmalert"
               android:label="@string/app_name">
-    </activity>
+    	</activity>
     </application>
-	<uses-permission android:name="android.permission.VIBRATE"/> 
 </manifest>

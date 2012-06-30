@@ -151,11 +151,15 @@ public class Kyomen_alarmActivity extends Activity {
                      c.set(Calendar.MINUTE,minute);
                      c.set(Calendar.SECOND,0);
                      c.set(Calendar.MILLISECOND,0);
-                     Intent intent = new Intent(Kyomen_alarmActivity.this, CallAlarm.class);
+                     
+                     Intent intent = new Intent("android.alarm.demo.action");
+                     
+                     //Intent intent = new Intent(Kyomen_alarmActivity.this, CallAlarm.class);
                      PendingIntent sender=PendingIntent.getBroadcast(
                     		 Kyomen_alarmActivity.this,0, intent, 0);
                      AlarmManager am;
                      am = (AlarmManager)getSystemService(ALARM_SERVICE);
+                     Log.v("test alarm","gettimein millis is "+c.getTimeInMillis());
                      am.set(AlarmManager.RTC_WAKEUP,
                             c.getTimeInMillis(),
                             sender
