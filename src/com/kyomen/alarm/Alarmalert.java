@@ -1,5 +1,6 @@
 package com.kyomen.alarm;
 
+//TODO when quit activity some error will happen. find it out
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -8,6 +9,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,6 +25,9 @@ public class Alarmalert extends Activity {
 	int input_len = 0;
 	public static final int total_length = 128;
 	int dialog_showed = 0;
+	MediaPlayer mplayer;
+	final int check_interval = 8000;
+
 	
 	private Handler myHandler = new Handler(){
 		public void handleMessage(Message msg)
@@ -34,6 +39,7 @@ public class Alarmalert extends Activity {
 				if(input_len <= last_input_len)
 				{
 					Log.v("","you must fall alseep");
+					mplayer.start();
 					if(dialog_showed == 0)
 					{
 						showDialog(Alarmalert.this);
@@ -68,11 +74,12 @@ public class Alarmalert extends Activity {
 	    Log.v("alarmalert","the activity to recive alarm data");
 	    
 	    data_add  = (TextView)findViewById(R.id.dailyinput);
-	    
+	    mplayer = MediaPlayer.create(this, R.raw.ring);
+
 		timer = new Timer();
 
 		try {
-			timer.scheduleAtFixedRate(new myTask(), 1, 5000);
+			timer.scheduleAtFixedRate(new myTask(), 1, check_interval);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
